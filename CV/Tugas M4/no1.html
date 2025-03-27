@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Latihan Hitung Faktorial</title>
+</head>
+<body>
+    <h2>Hitung faktorial dari input</h2>
+    <h3>Masukkan sembarang angka</h3>
+    <div id="datainput" style="float: left;">
+        <input type="text" id="angka"/>
+        <button onclick="fact()">click</button>
+    </div>
+    <br>
+    <p id="hasil"></p>
+    <br>
+    <script>
+        function fact() {
+            var i, num, f;
+            f = 1;
+            num = document.getElementById("angka").value;
+
+            for (i = 1; i <= num; i++) {
+                f = f * i;
+            }
+            document.getElementById("hasil").innerHTML = 
+                "angka faktorial dari " + num + " adalah : " + f;
+        }
+    </script>
+</body>
+</html>

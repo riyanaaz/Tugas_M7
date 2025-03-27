@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Latihan Validasi Input</title>
+</head>
+<body>
+    <h1>Validasi Input</h1>
+    <p>Masukkan nama, password, dan alamat email anda :</p>
+    <label for="nama">Nama:</label>
+    <input type="text" id="nama">
+    <br>
+    <label for="password">Password:</label>
+    <input type="password" id="password">
+    <br>
+    <label for="email">E-mail:</label>
+    <input type="email" id="email" name="email">
+    <br>
+    <button onclick="checkPassword()">Klik</button>
+    <p id="error" align="center"></p>
+    <br>
+    <script>
+        function checkPassword() {
+            const namaElement = document.getElementById("nama");
+            const emailElement = document.getElementById("email");
+            const passwordElement = document.getElementById("password");
+            const errorElement = document.getElementById("error");
+            const nama = namaElement.value;
+            const email = emailElement.value;
+            const password = passwordElement.value;
+
+            if (password === "sss") { 
+                alert("password benar")
+            } else {
+                alert("password salah")
+            }
+        }
+    </script>
+</body>
+</html>

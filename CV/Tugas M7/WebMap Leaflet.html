@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaflet Web Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+    <!-- Memanggil Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+
+    <script src="./bundle.js"></script>
+
+    <link rel="icon" href="LOGOUGM.png" type="image/x-icon">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css" />
+    <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.min.js"></script>
+
+    <style>
+    #map {
+        height: calc(100vh - 60px);
+    }
+    .navbar {
+        background-color: #003366; /* Warna biru tua */
+    }
+    .navbar-brand, .navbar-nav .nav-link, .navbar-text {
+        color: white;
+    }
+    .navbar-nav .nav-link:hover {
+        color: #FFD700; /* Warna emas saat hover */
+    }
+    .btn-outline-success {
+        color: white;
+        border-color: white;
+    }
+    .btn-outline-success:hover {
+        background-color: #FFD700;
+        color: black;
+    }
+
+    .leaflet-popup-content {
+        max-width: 200px;
+        height: 100px;
+        overflow-y: auto;
+        font-family: Arial, sans-serif;
+    }
+
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg">
+  <img src="LOGOUGM.png" alt="Bootstrap" width="30" height="30" />
+  <a class="navbar-brand" href="#"><b>Peta Rute Fakultas Teknik UGM ke Pakuwon Mall Jogja</b></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="WebMap Leaflet.html">Home <span class="sr-only"></span></a>
+      </li>
+    </ul>
+    <span class="navbar-text mx-auto">Riyana Ajizah (22/492759/TK/53944)</span>
+    <form class="form-inline my-2 my-lg-0">
+      <button class="btn btn-outline-success my-2 my-sm-0" onclick="cari()">Lokasi saya</button>
+    </form>
+  </div>
+</nav>
+
+<!-- Container Peta -->
+<div id="map"></div>
+
+<!-- Script Peta -->
+<script src="map.js"></script>
+<script src="jogja.js"></script>
+<script>
+    L.geoJSON(jogjageojson, {
+        style: function(feature) {
+            switch (feature.properties.KABUPATEN) {
+                case 'Gunung Kidul': return {color: "#ff9900"};
+                case 'Sleman': return {color: "red"};
+                case 'Bantul': return {color: "blue"};
+                case 'Yogyakarta': return {color: "green"};
+                case 'Kulon Progo': return {color: "magenta"};
+            }
+        },
+        onEachFeature: function(feature, layer) {
+            layer.bindPopup('Kecamatan ' + '<strong>' + feature.properties.KECAMATAN + '</strong>');
+        }
+    }).addTo(map);
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

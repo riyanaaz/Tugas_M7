@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaflet Web Map</title>
+
+    <!-- Menggunakan CDN untuk Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"/>
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+
+    <!-- Menggunakan CDN untuk Leaflet Routing Machine -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-routing-machine/3.2.12/leaflet-routing-machine.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-routing-machine/3.2.12/leaflet-routing-machine.min.js"></script>
+
+    <link rel="icon" href="LOGOUGM.png" type="image/x-icon">
+
+    <style>
+        body { margin: 0; padding: 0; }
+        html, body, #map { height: 100%; width: 100%; }
+
+        .leaflet-popup-content {
+            max-width: 200px;
+            height: 100px;
+            overflow-y: auto;
+        }
+
+        .site-header {
+            background-color: #238e4c;
+            width: 100%;
+            text-align: center;
+            padding: 15px;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="site-header">
+        Peta Rute Fakultas Teknik UGM ke Pakuwon Mall Jogja
+    </header>
+
+    <div id="map"></div>
+
+    <script>
+        var map = L.map('map').setView([-7.76528, 110.37227], 15);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        var markers = [
+            [-7.76528, 110.37227],  // Fakultas Teknik UGM
+            [-7.75980, 110.39898],  // Pakuwon Mall Jogja
+            [-7.75340, 110.36047],  // Jogja City Mall
+            [-7.78256, 110.37893],  // Galeria Mall
+            [-7.78392, 110.39057],  // Lippo Plaza Jogja
+            [-7.78232, 110.40123],  // Ambarukmo Plaza
+            [-7.79324, 110.36611]   // Malioboro Mall
+        ];
+
+        var bounds = L.latLngBounds(markers);
+        map.fitBounds(bounds, { maxZoom: 16 });
+
+        L.Routing.control({
+            waypoints: [
+                L.latLng(markers[0]),  // Fakultas Teknik UGM
+                L.latLng(markers[1])   // Pakuwon Mall Jogja
+            ],
+            lineOptions: {
+                styles: [{ color: 'green', opacity: 1, weight: 4 }]
+            },
+            collapsible: true,
+            show: false
+        }).addTo(map);
+
+        var markerInfo = [
+            { title: "Fakultas Teknik UGM", img: "FTUGM.jpg", desc: "Fakultas Teknik UGM memiliki berbagai program studi di bidang teknik, termasuk Teknik Geodesi, Sipil, Mesin, dan lainnya." },
+            { title: "Pakuwon Mall Jogja", img: "PakuwonMall.jpeg", desc: "Pakuwon Mall Jogja adalah salah satu mall terbesar di Jogja dengan banyak pilihan brand ternama." },
+            { title: "Jogja City Mall", img: "JogjaCityMall.jpeg", desc: "Jogja City Mall menawarkan pengalaman belanja unik dengan konsep arsitektur klasik dan berbagai toko terkenal." },
+            { title: "Galeria Mall", img: "GaleriaMall.jpeg", desc: "Galeria Mall adalah salah satu pusat perbelanjaan tertua di Yogyakarta dengan berbagai pilihan kuliner dan fashion." },
+            { title: "Lippo Plaza Jogja", img: "LippoPlaza.jpg", desc: "Lippo Plaza Jogja memiliki berbagai tenant menarik, termasuk bioskop, food court, dan supermarket besar." },
+            { title: "Ambarukmo Plaza", img: "AmbarukmoPlaza.jpg", desc: "Ambarukmo Plaza, atau Amplaz, adalah pusat perbelanjaan modern dengan berbagai tenant internasional dan area hiburan." },
+            { title: "Malioboro Mall", img: "MalioboroMall.jpg", desc: "Malioboro Mall terletak di pusat wisata Malioboro dan menawarkan berbagai pilihan belanja serta kuliner khas." }
+        ];
+
+        for (var i = 0; i < markers.length; i++) {
+            L.marker(markers[i], { title: markerInfo[i].title })
+                .addTo(map)
+                .bindPopup(
+                    `<h3>${markerInfo[i].title}</h3>
+                    <p>${markerInfo[i].desc}</p>
+                    <img src="./foto/${markerInfo[i].img}" style="width:150px">`
+                );
+        }
+    </script> 
+</body>
+</html>

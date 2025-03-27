@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Bilangan Prima</title>
+    </head>
+    <body>
+        <h2>Cari Bilangan Prima</h2>
+        <p>Masukkan sebuah angka:</p>
+        <input type="text" id="angka">
+        <button onclick="cariPrima()">Klik</button>
+        <p id="hasil"></p>
+
+        <script>
+            function isPrima(num) {
+                if (num < 2) return false;
+                for (var i = 2; i <= Math.sqrt(num); i++) {
+                    if (num % i === 0) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+
+            function cariPrima() {
+                var nilai = document.getElementById("angka").value;
+                var hasil = [];
+                
+                for (var i = 2; i <= nilai; i++) {
+                    if (isPrima(i)) {
+                        hasil.push(i);
+                    }
+                }
+                
+                document.getElementById("hasil").innerHTML = hasil.join(", ");
+            }
+        </script>
+    </body>
+</html>

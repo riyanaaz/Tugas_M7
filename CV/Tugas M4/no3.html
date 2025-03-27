@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Validasi Nama dan Umur</title>
+</head>
+<body>
+    <h1>Validasi Nama dan Umur</h1>
+    <p>Masukkan nama dan umur anda</p>
+    <label for="nama">Masukkan nama:</label>
+    <input type="text" id="nama"> <br> <br>
+    <label for="umur">Masukkan umur:</label>
+    <input type="number" id="umur"> <br> <br>
+    <button onclick="checkInput()">Validasi</button>
+    <p id="error"> </p> 
+    <p id="result" align="center"> </p>
+    <br> 
+    <script>
+        function checkInput() {
+            const namaElement = document.getElementById("nama");
+            const umurElement = document.getElementById("umur");
+            const errorElement = document.getElementById("error");
+            const resultElement = document.getElementById("result");
+            const nama = namaElement.value;
+            const umur = parseInt(umurElement.value);
+
+            errorElement.textContent = ""; 
+            resultElement.textContent = ""; 
+
+            if (nama === "" && isNaN(umur)) {
+                alert("Isikan nama dan umur!!");
+                return;
+            } else if (nama === "") {
+                alert("Isikan nama!!");
+                return;
+            } else if (isNaN(umur)) {
+                alert("Isikan umur!!");
+                return;
+            }
+
+			
+            if (umur < 0 || umur == 0) {
+                resultElement.textContent = "Anda Game Over";
+            } else if (umur <= 5) {
+                resultElement.textContent = "Anda masih bayi";
+            } else if (umur >=6 && umur <= 15) {
+                resultElement.textContent = "Anda masih anak-Anak";
+            } else if (umur >= 16 && umur <= 30) {
+                resultElement.textContent = "Anda masih remaja";
+            } else if (umur >= 31 && umur <= 60) {
+                resultElement.textContent = "Anda sudah dewasa";
+            } else if (umur >= 61) {
+                resultElement.textContent = "Anda sudah tua";
+            } 
+        }
+    </script>
+</body>
+</html>

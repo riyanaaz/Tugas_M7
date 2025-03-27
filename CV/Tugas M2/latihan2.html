@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Latihan 2 Prak SIG WEB</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>City Gallery</title>
+    <style>
+        body {
+            font-family: Times;
+            margin: 0;
+            padding: 0;
+        }
+        .header, .footer {
+            background-color: blue;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+        .container {
+            display: flex;
+        }
+        .sidebar {
+            width: 20%;
+            background-color: #f2f2f2;
+            padding: 5px;
+        }
+        .sidebar a {
+            display: block;
+            padding: 10px;
+            text-decoration: none;
+            color: black;
+        }
+        .sidebar a:hover {
+            background-color: #ddd;
+        }
+        .content {
+            width: 90%;
+            padding: 20px;
+            display: flex;
+            align-items: flex-start;
+        }
+        .text {
+            width: 60%;
+        }
+        .image {
+            width: 40%;
+            text-align: right;
+        }
+        .image img {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>City Gallery</h1>
+    </div>
+    <div class="container">
+        <div class="sidebar">
+            <a href="#" onclick="showCity('London')">London</a>
+            <a href="#" onclick="showCity('Paris')">Paris</a>
+            <a href="#" onclick="showCity('Tokyo')">Tokyo</a>
+        </div>
+        <div class="content" id="cityContent">
+            <div class="text">
+                <h2>London</h2>
+                <p>London is the capital city of England. It is the most populous city in the United Kingdom, with a metropolitan area of over 13 million inhabitants.</p>
+                <p>Standing on the River Thames, London has been a major settlement for two millennia, its history going back to its founding by the Romans, who named it Londinium.</p>
+            </div>
+            <div class="image">
+                <img src="london.png" alt="London">
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <p>Copyright @riyanaajizah</p>
+    </div>
+
+    <script>
+        function showCity(city) {
+            let content = {
+                'London': {
+                    title: 'London',
+                    description: 'London is the capital city of England. It is the most populous city in the United Kingdom, with a metropolitan area of over 13 million inhabitants.<br><br>Standing on the River Thames, London has been a major settlement for two millennia, its history going back to its founding by the Romans, who named it Londinium.',
+                    image: 'london.png'
+                },
+                'Paris': {
+                    title: 'Paris',
+                    description: 'Paris is the capital city of France. It is known for its cafe culture, iconic landmarks such as the Eiffel Tower, and its rich history in art and fashion.',
+                    image: 'paris.png'
+                },
+                'Tokyo': {
+                    title: 'Tokyo',
+                    description: 'Tokyo is the capital city of Japan. It is a bustling metropolis known for its modern technology, vibrant street life, and historical temples.',
+                    image: 'tokyo.png'
+                }
+            };
+            
+            document.getElementById('cityContent').innerHTML = `
+                <div class="text">
+                    <h2>${content[city].title}</h2>
+                    <p>${content[city].description}</p>
+                </div>
+                <div class="image">
+                    <img src="${content[city].image}" alt="${city}">
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>
